@@ -1,0 +1,14 @@
+.product-details {
+    width: 0;
+    opacity: 0;
+    height: calc(100vh - 68px);
+    top: 68px;
+    transform: translateX(360px);
+    transition: all 200ms ease;
+}
+
+.product-details--active {
+    opacity: 1;
+    transform: translateX(0);
+    width: 360px;
+}

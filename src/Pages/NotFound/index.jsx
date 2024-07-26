@@ -1,8 +1,9 @@
 import React from 'react';
+import {Layout} from "../../Components/Layout";
 
 function NotFound() {
     return (
-        <h1>NotFound</h1>
+        <Layout>NotFound</Layout>
     );
 }
 

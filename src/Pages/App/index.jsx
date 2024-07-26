@@ -5,8 +5,10 @@ import {MyOrders} from "../MyOrders";
 import {MyOrder} from "../MyOrder";
 import {NotFound} from "../NotFound";
 import {Signin} from "../Signin";
+import {NavBar} from "../../Components/NavBar";
 
-import {useRoutes, BrowserRouter} from "react-router-dom";
+import {useRoutes} from "react-router-dom";
+import {ShopProvider} from "../../Context/index.jsx";
 
 function App() {
     const AppRoutes = () => {
@@ -17,13 +19,18 @@ function App() {
             {path: '/my-orders', element: <MyOrders/>},
             {path: '/my-order', element: <MyOrder/>},
             {path: '/*', element: <NotFound/>},
-            {path: '/signin', element: <Signin/>},
+            {path: '/sign-in', element: <Signin/>},
         ])
     }
 
 
     return (
-        <AppRoutes/>
+        <>
+            <ShopProvider>
+                <NavBar/>
+                <AppRoutes/>
+            </ShopProvider>
+        </>
     )
 }
 

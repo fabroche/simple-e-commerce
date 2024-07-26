@@ -1,9 +1,10 @@
 import React from 'react';
+import {Layout} from "../../Components/Layout";
 
 function MyOrders() {
     return (
         <>
-            <h2>MyOrders</h2>
+            <Layout>MyOrders</Layout>
         </>
     );
 }

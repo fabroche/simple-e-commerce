@@ -1,8 +1,9 @@
 import React from 'react';
+import {Layout} from "../../Components/Layout";
 
 function Signin() {
     return (
-        <h1>Signin</h1>
+        <Layout>Signin</Layout>
     );
 }
 
