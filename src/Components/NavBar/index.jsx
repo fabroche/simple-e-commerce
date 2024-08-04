@@ -6,9 +6,14 @@ import {ShoppingBagIcon} from "@heroicons/react/16/solid/index.js";
 
 function NavBar() {
     const activeStyle = "underline";
-    const {shoppingCartCount} = useContext(ShopContext);
+    const {
+        shoppingCartCount,
+        setIsMyOrderOpen
+    } = useContext(ShopContext);
+
     return (
-        <nav className="flex justify-between items-center fixed top-0 z-10 w-full py-5 px-8 text-sm font-light bg-white">
+        <nav
+            className="flex justify-between items-center fixed top-0 z-10 w-full py-5 px-8 text-sm font-light bg-white">
             <ul className="flex justify-between items-center gap-3">
                 <li className="font-semibold text-lg">
                     <NavLink
@@ -129,7 +134,10 @@ function NavBar() {
                 <li
                     className="flex justify-center items-center"
                 >
-                    <ShoppingBagIcon className="w-6 h-full cursor-pointer"/>
+                    <ShoppingBagIcon
+                        onClick={() => setIsMyOrderOpen(true)}
+                        className="w-6 h-full cursor-pointer"
+                    />
                     <span className="select-none">{shoppingCartCount}</span>
                 </li>
             </ul>

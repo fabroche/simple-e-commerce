@@ -9,6 +9,8 @@ import {NavBar} from "../../Components/NavBar";
 
 import {useRoutes} from "react-router-dom";
 import {ShopProvider} from "../../Context/index.jsx";
+import {CheckoutSideMenu} from "../../Components/CheckoutSideMenu/index.jsx";
+import React from "react";
 
 function App() {
     const AppRoutes = () => {
@@ -29,6 +31,7 @@ function App() {
             <ShopProvider>
                 <NavBar/>
                 <AppRoutes/>
+                <CheckoutSideMenu/>
             </ShopProvider>
         </>
     )

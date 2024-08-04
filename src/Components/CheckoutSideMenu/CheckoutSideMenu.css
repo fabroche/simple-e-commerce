@@ -1,4 +1,4 @@
-.product-details {
+.checkout-side-menu {
     overflow-y: scroll;
     width: 0;
     opacity: 0;
@@ -8,7 +8,7 @@
     transition: all 200ms ease;
 }
 
-.product-details--active {
+.checkout-side-menu--active {
     opacity: 1;
     transform: translateX(0);
     width: 360px;
