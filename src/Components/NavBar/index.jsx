@@ -8,6 +8,7 @@ import {ShoppingBagIcon} from "@heroicons/react/16/solid/index.js";
 function NavBar() {
     const activeStyle = "underline";
     const {
+        categories,
         shoppingCartCount,
         setIsMyOrderOpen
     } = useContext(ShopContext);
@@ -36,58 +37,24 @@ function NavBar() {
                         All
                     </NavLink>
                 </li>
-                <li>
-                    <NavLink
-                        to='/clothes'
-                        className={
-                            ({isActive}) =>
-                                isActive
-                                    ? activeStyle
-                                    : undefined
-                        }
-                    >
-                        Clothes
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to='/electronics'
-                        className={
-                            ({isActive}) =>
-                                isActive
-                                    ? activeStyle
-                                    : undefined
-                        }
-                    >
-                        Electronics
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to='/fornitures'
-                        className={
-                            ({isActive}) =>
-                                isActive
-                                    ? activeStyle
-                                    : undefined
-                        }
-                    >
-                        Furnitures
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink
-                        to='/toys'
-                        className={
-                            ({isActive}) =>
-                                isActive
-                                    ? activeStyle
-                                    : undefined
-                        }
-                    >
-                        Toys
-                    </NavLink>
-                </li>
+                {
+                    categories?.map(category => (
+                        <li key={category}>
+                            <NavLink
+                                key={category}
+                                to={`/${category.replace(' ', '-')}`}
+                                className={
+                                    ({isActive}) =>
+                                        isActive
+                                            ? activeStyle
+                                            : undefined
+                                }
+                            >
+                                {category[0].toUpperCase() + category.slice(1)}
+                            </NavLink>
+                        </li>
+                    ))
+                }
             </ul>
             <ul className="flex justify-between items-center gap-3">
                 <li className="font-light text-lg text-gray-400">

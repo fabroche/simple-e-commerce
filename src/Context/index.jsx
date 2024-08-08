@@ -5,6 +5,9 @@ import {useLocalStorage} from "../CustomHooks/UseLocalStorage.jsx";
 const ShopContext = createContext();
 
 function ShopProvider({children}) {
+    //API
+    const apiUrl = 'https://fakestoreapi.com'
+
     const [products, setProducts] = useState([]);
     const [productsDetails, setProductsDetails] = useState({});
     const [shoppingCartProducts, setShoppingCartProducts] = useState([])
@@ -14,6 +17,7 @@ function ShopProvider({children}) {
     const [search, setSearch] = useState('')
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const [categories, setCategories] = useState([])
 
     // Estados derivados
     const isProductDetailsOpen = Object.keys(productsDetails).length > 0
@@ -67,7 +71,7 @@ function ShopProvider({children}) {
         try {
             const fetchProducts = async () => {
                 setLoading(true)
-                const response = await fetch('https://fakestoreapi.com/products/');
+                const response = await fetch(`${apiUrl}/products/`);
                 const data = await response.json();
                 setProducts(data);
                 setLoading(false)
@@ -79,6 +83,23 @@ function ShopProvider({children}) {
         }
 
     }, []);
+
+    useEffect(() => {
+        try {
+            const fetchProductsCategories = async () => {
+                setLoading(true)
+                const response = await fetch(`${apiUrl}/products/categories`);
+                const data = await response.json();
+                setCategories(data);
+                setLoading(false)
+            };
+            fetchProductsCategories()
+        } catch (error) {
+            setLoading(false)
+            setError(true)
+        }
+    }, []);
+
 
     useEffect(() => {
         setOrders(orders.sort((a, b) => new Date(b.date) - new Date(a.date)))
@@ -97,6 +118,8 @@ function ShopProvider({children}) {
             shoppingCartTotalPrice,
             setShoppingCartTotalPrice,
             calculateShoppingCartTotalPrice,
+            categories,
+            setCategories,
             orders,
             setOrders,
             search,
