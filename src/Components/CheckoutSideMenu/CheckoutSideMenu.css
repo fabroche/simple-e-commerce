@@ -1,5 +1,4 @@
 .checkout-side-menu {
-    overflow-y: scroll;
     width: 0;
     opacity: 0;
     height: calc(100vh - 68px);
@@ -12,4 +11,21 @@
     opacity: 1;
     transform: translateX(0);
     width: 360px;
+}
+
+#shoppingCart-products-container::-webkit-scrollbar {
+    background-color: transparent;
+    width: 6px;
+}
+
+
+#shoppingCart-products-container::-webkit-scrollbar-track {
+    /*background: orange; !* Color del área de seguimiento *!*/
+}
+
+#shoppingCart-products-container::-webkit-scrollbar-thumb {
+    padding: 6px;
+    background-color: black; /* Color del thumb (deslizador) */
+    border-radius: 20px; /* Redondez del thumb */
+    border: 3px solid var(--soft-white); /* Crea un borde alrededor del thumb */
 }

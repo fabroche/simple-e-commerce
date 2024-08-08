@@ -19,7 +19,8 @@ function App() {
             {path: '/', element: <Home/>},
             {path: '/my-account', element: <MyAccount/>},
             {path: '/my-orders', element: <MyOrders/>},
-            {path: '/my-order', element: <MyOrder/>},
+            {path: '/my-order/:index', element: <MyOrder/>},
+            {path: '/my-order/last', element: <MyOrder/>},
             {path: '/*', element: <NotFound/>},
             {path: '/sign-in', element: <Signin/>},
         ])

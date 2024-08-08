@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import './ProductDetails.css';
 import {XCircleIcon} from "@heroicons/react/24/solid";
 import {ShopContext} from "../../Context/index.jsx";
+import {PriceCurrency} from "../PriceCurrency/index.jsx";
 
 function ProductDetails() {
 
@@ -31,8 +32,8 @@ function ProductDetails() {
                 />
                 <div className="p-6 flex flex-col gap-2">
                     <h3 className="relative font-medium text-2xl">
-                        {productsDetails?.price.toFixed(2)}
-                        <span className="absolute top-0 text-xs">€</span>
+                        {Number(productsDetails?.price).toFixed(2)}
+                        <PriceCurrency currency={"€"}/>
                     </h3>
                     <p className="font-semibold">{productsDetails?.title}</p>
                     <p>{productsDetails?.description}</p>

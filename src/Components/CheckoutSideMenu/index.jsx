@@ -3,6 +3,8 @@ import './CheckoutSideMenu.css';
 import {XCircleIcon} from "@heroicons/react/24/solid";
 import {ShopContext} from "../../Context/index.jsx";
 import {OrderCard} from "../OrderCard";
+import {Link} from "react-router-dom";
+import {PriceCurrency} from "../PriceCurrency/index.jsx";
 
 function CheckoutSideMenu() {
 
@@ -12,7 +14,31 @@ function CheckoutSideMenu() {
         shoppingCartTotalPrice,
         isMyOrderOpen,
         setIsMyOrderOpen,
+        obtenerFechaActual,
+        orders,
+        setOrders
     } = useContext(ShopContext);
+
+
+    function handleCheckout() {
+
+        const newOrder = shoppingCartProducts.reduce((diccionario, producto) => {
+            const quantity = Number(document.getElementById(`${producto.id}-quantity`).innerText);
+            const totalPrice = Number(quantity * producto.price).toFixed(2);
+            diccionario[producto.title] = {...producto, quantity: quantity, totalPrice: Number(totalPrice)};
+            return diccionario;
+        }, {});
+
+        const toAddOrder = {
+            date: obtenerFechaActual(),
+            products: newOrder,
+            total: Number(shoppingCartTotalPrice)
+        };
+
+        setShoppingCartProducts([]);
+        setIsMyOrderOpen(false);
+        setOrders([...orders, toAddOrder]);
+    }
 
     return (
         <aside
@@ -27,25 +53,32 @@ function CheckoutSideMenu() {
 
             <div
                 id="shoppingCart-container"
-                className="flex flex-col gap-4 p-6"
+                className="flex flex-col gap-4 p-6 min-h-full"
             >
-                <h2 className="text-xl font-medium">My Orders</h2>
+                <h2 className="text-xl font-medium">My Shopping Cart</h2>
 
-                {shoppingCartProducts.length === 0 && <p className="text-black-500 text-center">No products in cart</p>}
-                {
-                    shoppingCartProducts?.map(product => (
-                        <OrderCard
-                            key={product.id}
-                            product={product}
-                        />
-                    ))
-                }
-                <button
-                    className="relative w-fit self-center p-1 pr-4 pl-4 font-medium text-xl rounded-lg border border-black bg-black text-white text-center"
-                >
-                    Checkout: {shoppingCartTotalPrice}
-                    <span className="absolute top-0 text-xs">€</span>
-                </button>
+                {shoppingCartProducts.length === 0 &&
+                    <p className="text-black-500 text-center flex-1">No products in cart</p>}
+                <div
+                    id="shoppingCart-products-container"
+                    className="flex-1 flex flex-col gap-4 overflow-hidden overflow-y-scroll pl-2 pr-2">
+                    {
+                        shoppingCartProducts?.map(product => (
+                            <OrderCard
+                                key={product.id}
+                                product={product}
+                            />
+                        ))
+                    }
+                </div>
+
+                <Link to="/my-order/last">
+                    <button
+                        onClick={() => handleCheckout()}
+                        className="relative w-full p-1 pr-4 pl-4 font-medium text-xl rounded-lg border border-black bg-black text-white text-center"
+                    >Checkout: {shoppingCartTotalPrice}<PriceCurrency currency={"€"}/>
+                    </button>
+                </Link>
             </div>
         </aside>
     );

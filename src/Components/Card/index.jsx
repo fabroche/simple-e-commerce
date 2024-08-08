@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {ShopContext} from "../../Context/index.jsx";
 import {PlusIcon, CheckIcon} from "@heroicons/react/16/solid/index.js";
 import './Card.css'
+import {PriceCurrency} from "../PriceCurrency/index.jsx";
 
 function Card({product}) {
     const {category, image, title, price} = product;
@@ -47,7 +48,7 @@ function Card({product}) {
                 <span className="text-sm font-light truncate m-2">{title}</span>
                 <span className="relative text-lg font-medium text-nowrap">
                     {Number(price).toFixed(2)}
-                    <span className="absolute top-0 text-xs">€</span>
+                    <PriceCurrency currency={"€"}/>
                 </span>
             </p>
         </div>

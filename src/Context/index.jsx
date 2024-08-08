@@ -1,4 +1,6 @@
 import {createContext, useEffect, useState} from "react";
+import {format, addDay} from "@formkit/tempo";
+import {useLocalStorage} from "../CustomHooks/UseLocalStorage.jsx";
 
 const ShopContext = createContext();
 
@@ -8,6 +10,7 @@ function ShopProvider({children}) {
     const [shoppingCartProducts, setShoppingCartProducts] = useState([])
     const [shoppingCartTotalPrice, setShoppingCartTotalPrice] = useState(0)
     const [isMyOrderOpen, setIsMyOrderOpen] = useState()
+    const [orders, setOrders] = useLocalStorage('my-orders', [])
 
     // Estados derivados
     const isProductDetailsOpen = Object.keys(productsDetails).length > 0
@@ -46,8 +49,14 @@ function ShopProvider({children}) {
         return shoppingCartProducts.reduce((total, product) => total + parseFloat(document.getElementById(`${product.id}-price`).innerText.split('€')[0]), 0).toFixed(2)
     }
 
+    function obtenerFechaActual() {
+
+        return addDay(new Date(), 1).toISOString();
+    }
+
+
     useEffect(() => {
-       setShoppingCartTotalPrice(calculateShoppingCartTotalPrice())
+        setShoppingCartTotalPrice(calculateShoppingCartTotalPrice())
     }, [shoppingCartProducts]);
 
 
@@ -59,6 +68,10 @@ function ShopProvider({children}) {
         };
         fetchProducts()
 
+    }, []);
+
+    useEffect(() => {
+        setOrders(orders.sort((a, b) => new Date(b.date) - new Date(a.date)))
     }, []);
 
 
@@ -74,6 +87,8 @@ function ShopProvider({children}) {
             shoppingCartTotalPrice,
             setShoppingCartTotalPrice,
             calculateShoppingCartTotalPrice,
+            orders,
+            setOrders,
             shoppingCartProducts,
             setShoppingCartProducts,
             isMyOrderOpen,
@@ -81,7 +96,8 @@ function ShopProvider({children}) {
             removeShoppingCartProduct,
             handleShoppingCart,
             isProductInCart,
-            showProductDetails
+            showProductDetails,
+            obtenerFechaActual
         }}>
             {children}
         </ShopContext.Provider>
