@@ -22,7 +22,7 @@ function Home() {
 
     return (
         <Layout>
-            <h1 className="font-medium text-xl mb-2">Exclusive Products</h1>
+            <h1 className="font-medium text-xl mb-2">Looti Products</h1>
             <input
                 className="rounded-lg border border-black w-80 p-2 pl-4 pr-4 mb-6 focus:outline-none"
                 type="text"
@@ -39,12 +39,15 @@ function Home() {
                     />
                 ))}
 
-                {filteredProducts?.map(product => (
-                    <Card
-                        key={product.id}
-                        product={product}
-                    />
-                ))}
+                {filteredProducts.length > 0 ?
+                    filteredProducts?.map(product => (
+                        <Card
+                            key={product.id}
+                            product={product}
+                        />
+                    ))
+                : <p className="no-coincidences-text">There is not coincidences</p>
+                }
                 <ProductDetails/>
             </div>
         </Layout>

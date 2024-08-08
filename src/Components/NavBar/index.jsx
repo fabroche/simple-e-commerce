@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import './NavBar.css'
 import {NavLink} from "react-router-dom";
 import {ShopContext} from "../../Context/index.jsx";
 import {ShoppingBagIcon} from "@heroicons/react/16/solid/index.js";
@@ -19,7 +20,7 @@ function NavBar() {
                     <NavLink
                         to='/'
                     >
-                        Shopi
+                        Lootify
                     </NavLink>
                 </li>
                 <li>

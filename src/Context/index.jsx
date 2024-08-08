@@ -82,8 +82,7 @@ function ShopProvider({children}) {
 
     useEffect(() => {
         setOrders(orders.sort((a, b) => new Date(b.date) - new Date(a.date)))
-    }, []);
-
+    }, [orders]);
 
     return (
         <ShopContext.Provider value={{
