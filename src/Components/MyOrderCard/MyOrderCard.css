@@ -1,0 +1,7 @@
+.my-order-card-container {
+    transition: all .3s ease;
+}
+
+.my-order-card-container:hover {
+    transform: scale(1.05);
+}
