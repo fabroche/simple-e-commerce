@@ -11,12 +11,15 @@ function ShopProvider({children}) {
     const [shoppingCartTotalPrice, setShoppingCartTotalPrice] = useState(0)
     const [isMyOrderOpen, setIsMyOrderOpen] = useState()
     const [orders, setOrders] = useLocalStorage('my-orders', [])
+    const [search, setSearch] = useState('')
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
 
     // Estados derivados
     const isProductDetailsOpen = Object.keys(productsDetails).length > 0
     const shoppingCartCount = shoppingCartProducts.length
     const shoppingCartTotal = shoppingCartProducts.reduce((total, product) => total + product.price, 0)
-
+    const filteredProducts = products.filter(product => product.title.toLowerCase().includes(search.toLowerCase()))
     //Functions
 
     function showProductDetails(product) {
@@ -61,12 +64,19 @@ function ShopProvider({children}) {
 
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            const response = await fetch('https://fakestoreapi.com/products/');
-            const data = await response.json();
-            setProducts(data);
-        };
-        fetchProducts()
+        try {
+            const fetchProducts = async () => {
+                setLoading(true)
+                const response = await fetch('https://fakestoreapi.com/products/');
+                const data = await response.json();
+                setProducts(data);
+                setLoading(false)
+            };
+            fetchProducts()
+        } catch (error) {
+            setLoading(false)
+            setError(true)
+        }
 
     }, []);
 
@@ -78,6 +88,7 @@ function ShopProvider({children}) {
     return (
         <ShopContext.Provider value={{
             products,
+            filteredProducts,
             setProducts,
             productsDetails,
             setProductsDetails,
@@ -89,10 +100,13 @@ function ShopProvider({children}) {
             calculateShoppingCartTotalPrice,
             orders,
             setOrders,
+            search,
+            setSearch,
             shoppingCartProducts,
             setShoppingCartProducts,
             isMyOrderOpen,
             setIsMyOrderOpen,
+            loading,
             removeShoppingCartProduct,
             handleShoppingCart,
             isProductInCart,
