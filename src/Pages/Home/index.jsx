@@ -11,6 +11,7 @@ function Home() {
         filteredProducts,
         search,
         setSearch,
+
     } = useContext(ShopContext);
 
     const emptyProduct = {

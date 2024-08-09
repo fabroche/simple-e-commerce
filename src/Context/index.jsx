@@ -7,7 +7,11 @@ const ShopContext = createContext();
 function ShopProvider({children}) {
     //API
     const apiUrl = 'https://fakestoreapi.com'
-
+    const options = {
+        headers: {
+            cors: 'no-cors'
+        }
+    }
     // Estados
     const [products, setProducts] = useState([]);
     const [productsDetails, setProductsDetails] = useState({});
@@ -112,7 +116,7 @@ function ShopProvider({children}) {
         try {
             const fetchProducts = async () => {
                 setLoading(true)
-                const response = await fetch(`${apiUrl}/products/`);
+                const response = await fetch(`${apiUrl}/products/`,options);
                 const data = await response.json();
                 setProducts(data);
                 setLoading(false)
@@ -129,7 +133,7 @@ function ShopProvider({children}) {
         try {
             const fetchProductsCategories = async () => {
                 setLoading(true)
-                const response = await fetch(`${apiUrl}/products/categories`);
+                const response = await fetch(`${apiUrl}/products/categories`, options);
                 const data = await response.json();
                 setCategories(data);
                 setLoading(false)
