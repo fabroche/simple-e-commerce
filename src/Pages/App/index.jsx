@@ -10,13 +10,13 @@ import {NavBar} from "../../Components/NavBar";
 import {useRoutes} from "react-router-dom";
 import {ShopContext, ShopProvider} from "../../Context/index.jsx";
 import {CheckoutSideMenu} from "../../Components/CheckoutSideMenu/index.jsx";
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 
 function App() {
     const AppRoutes = () => {
 
         const {
-            categories
+            categories,
         } = useContext(ShopContext);
 
         const categoriesRoutes = categories?.map(category => {
@@ -28,7 +28,11 @@ function App() {
 
         return useRoutes([
             {path: '/', element: <Home/>},
-            ...categoriesRoutes,
+            {path: '/electronics', element: <Home/>},
+            {path: '/jewelery', element: <Home/>},
+            {path: '/men\'s-clothing', element: <Home/>},
+            {path: '/women\'s-clothing', element: <Home/>},
+            // ...categoriesRoutes,
             {path: '/my-account', element: <MyAccount/>},
             {path: '/my-orders', element: <MyOrders/>},
             {path: '/my-order/:index', element: <MyOrder/>},
@@ -37,7 +41,6 @@ function App() {
             {path: '/sign-in', element: <Signin/>},
         ])
     }
-
 
     return (
         <>

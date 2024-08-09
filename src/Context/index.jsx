@@ -8,6 +8,7 @@ function ShopProvider({children}) {
     //API
     const apiUrl = 'https://fakestoreapi.com'
 
+    // Estados
     const [products, setProducts] = useState([]);
     const [productsDetails, setProductsDetails] = useState({});
     const [shoppingCartProducts, setShoppingCartProducts] = useState([])
@@ -18,13 +19,53 @@ function ShopProvider({children}) {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [categories, setCategories] = useState([])
+    const [filteredProductsCategories, setFilteredProductsCategories] = useState(location.href.split('/').slice(-1)[0].replace('-', ' '))
+    const [shoppingCartCount, setShoppingCartCount] = useState(0)
 
     // Estados derivados
     const isProductDetailsOpen = Object.keys(productsDetails).length > 0
-    const shoppingCartCount = shoppingCartProducts.length
     const shoppingCartTotal = shoppingCartProducts.reduce((total, product) => total + product.price, 0)
-    const filteredProducts = products.filter(product => product.title.toLowerCase().includes(search.toLowerCase()))
+    const filteredProducts = products.filter(product => filteredProductsCategories !== ''
+        ? product.title.toLowerCase().includes(search.toLowerCase()) && product.category === filteredProductsCategories
+        : product.title.toLowerCase().includes(search.toLowerCase())
+    )
+
+    function updateCartCount() {
+        setShoppingCartCount(shoppingCartProducts.reduce((total, product) =>total + Number(document.getElementById(`${product.id}-quantity`).innerText), 0))
+    }
+
+    useEffect(() => {
+        updateCartCount()
+    }, [shoppingCartProducts]);
+
+    // Observers
+
+    // callbacks
+    const imageObserver = (entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.target.classList.contains('card--loading')) return
+            if (entry.isIntersecting) {
+                entry.target.children[0].children[1].src = entry.target.children[0].children[1].getAttribute('data-src')
+                observer.unobserve(entry.target)
+            }
+        })
+    }
+
+    const imageObserverOptions = {
+        threshold: 0
+    }
+
+    const imageLazyLoadingObserver = new IntersectionObserver(imageObserver, imageObserverOptions)
+
+
     //Functions
+
+    function setLazyLoading() {
+        const productsListContainerElement = document.getElementById('productsList-container')
+        productsListContainerElement?.childNodes.forEach(productContainer => {
+            if (productContainer.nodeName === 'DIV' ) imageLazyLoadingObserver.observe(productContainer)
+        })
+    }
 
     function showProductDetails(product) {
         if (isMyOrderOpen) {
@@ -120,10 +161,14 @@ function ShopProvider({children}) {
             calculateShoppingCartTotalPrice,
             categories,
             setCategories,
+            filteredProductsCategories,
+            setFilteredProductsCategories,
             orders,
             setOrders,
             search,
             setSearch,
+            imageLazyLoadingObserver,
+            setLazyLoading,
             shoppingCartProducts,
             setShoppingCartProducts,
             isMyOrderOpen,
@@ -132,6 +177,7 @@ function ShopProvider({children}) {
             removeShoppingCartProduct,
             handleShoppingCart,
             isProductInCart,
+            updateCartCount,
             showProductDetails,
             obtenerFechaActual
         }}>

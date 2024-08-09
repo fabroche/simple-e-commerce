@@ -10,7 +10,8 @@ function NavBar() {
     const {
         categories,
         shoppingCartCount,
-        setIsMyOrderOpen
+        setIsMyOrderOpen,
+        setFilteredProductsCategories
     } = useContext(ShopContext);
 
     return (
@@ -20,6 +21,7 @@ function NavBar() {
                 <li className="font-semibold text-lg">
                     <NavLink
                         to='/'
+                        onClick={() => setFilteredProductsCategories('')}
                     >
                         Lootify
                     </NavLink>
@@ -33,6 +35,7 @@ function NavBar() {
                                     ? activeStyle
                                     : undefined
                         }
+                        onClick={() => setFilteredProductsCategories('')}
                     >
                         All
                     </NavLink>
@@ -49,6 +52,7 @@ function NavBar() {
                                             ? activeStyle
                                             : undefined
                                 }
+                                onClick={() => setFilteredProductsCategories(category)}
                             >
                                 {category[0].toUpperCase() + category.slice(1)}
                             </NavLink>
@@ -69,6 +73,7 @@ function NavBar() {
                                     ? activeStyle
                                     : undefined
                         }
+                        onClick={() => setFilteredProductsCategories('')}
                     >
                         My Orders
                     </NavLink>
@@ -82,6 +87,7 @@ function NavBar() {
                                     ? activeStyle
                                     : undefined
                         }
+                        onClick={() => setFilteredProductsCategories('')}
                     >
                         My Account
                     </NavLink>
@@ -95,6 +101,7 @@ function NavBar() {
                                     ? activeStyle
                                     : undefined
                         }
+                        onClick={() => setFilteredProductsCategories('')}
                     >
                         Sign In
                     </NavLink>

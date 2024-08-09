@@ -1,16 +1,16 @@
-import React, {useContext} from 'react';
+import React, {useContext, lazy, Suspense, useEffect} from 'react';
 import {Layout} from "../../Components/Layout";
 import {Card} from "../../Components/Card";
 import {ShopContext} from "../../Context/index.jsx";
 import {ProductDetails} from "../../Components/ProductDetails/index.jsx";
 
 function Home() {
+
     const {
-        products,
         loading,
         filteredProducts,
         search,
-        setSearch
+        setSearch,
     } = useContext(ShopContext);
 
     const emptyProduct = {
@@ -30,8 +30,10 @@ function Home() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
-            <div className="grid grid-cols-4 gap-4 w-full max-w-screen-lg">
-
+            <div
+                id="productsList-container"
+                className="grid grid-cols-4 gap-4 w-full max-w-screen-lg"
+            >
                 {loading && [...Array(16)].map((_, index) => (
                     <Card
                         key={index}

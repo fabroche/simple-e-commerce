@@ -14,11 +14,17 @@ function OrderCard({product, isCheckout = false}) {
         removeShoppingCartProduct,
         setShoppingCartTotalPrice,
         calculateShoppingCartTotalPrice,
+        updateCartCount
     } = useContext(ShopContext);
 
     useEffect(() => {
         setShoppingCartTotalPrice(calculateShoppingCartTotalPrice());
     }, [quantity]);
+
+    useEffect(() => {
+        updateCartCount();
+    }, [quantity]);
+
 
     return (
         <div

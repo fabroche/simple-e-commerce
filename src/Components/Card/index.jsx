@@ -11,7 +11,7 @@ function Card({product}) {
         loading,
         isProductInCart,
         handleShoppingCart,
-        showProductDetails
+        showProductDetails,
     } = useContext(ShopContext);
 
     return (
