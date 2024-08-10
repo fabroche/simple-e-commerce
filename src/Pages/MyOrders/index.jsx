@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import './MyOrders.css'
 import {Layout} from "../../Components/Layout";
 import {ShopContext} from "../../Context/index.jsx";
 import {MyOrderCard} from "../../Components/MyOrderCard/index.jsx";
@@ -11,7 +12,7 @@ function MyOrders() {
     return (
         <Layout>
             <h1 className="mb-6 text-lg font-medium">MyOrders</h1>
-            <div className="flex gap-4 justify-center items-center flex-wrap w-1/2 mb-2">
+            <div className="orders-list-container flex gap-4 justify-center items-center flex-wrap mb-2">
                 {orders.map((order, index) => (
                     <Link key={index} to={`/my-order/${index}`} className="w-full">
                         <MyOrderCard

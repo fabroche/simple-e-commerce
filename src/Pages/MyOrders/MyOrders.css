@@ -1,0 +1,15 @@
+.orders-list-container {
+
+}
+
+@media screen and (width < 768px) {
+    .orders-list-container {
+        width: 100%;
+    }
+}
+
+@media screen and (width >= 768px) {
+    .orders-list-container {
+        width: 50%;
+    }
+}

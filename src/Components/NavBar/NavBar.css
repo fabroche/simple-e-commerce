@@ -2,3 +2,41 @@
     text-align: center;
     grid-column: 1/-1;
 }
+
+.filters-container {
+    opacity: 0;
+    display: none;
+    transition: all 200ms ease;
+}
+
+#filter-categories-mobile:hover .filters-container {
+    display: flex;
+    height: auto;
+    opacity: 1;
+}
+
+.mobile-aside-navbar {
+    width: 0;
+    opacity: 0;
+    height: 100%;
+    top: 0;
+    transform: translateX(360px);
+    transition: all 200ms ease;
+}
+
+.mobile-aside-navbar--active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@media screen and (width >= 768px) {
+    .mobile-aside-navbar--active {
+        width: 360px;
+    }
+}
+
+@media screen and (width < 768px) {
+    .mobile-aside-navbar--active {
+        width: 100%;
+    }
+}

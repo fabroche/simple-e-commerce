@@ -35,7 +35,13 @@
     }
 }
 
-@media screen and (width <= 425px) {
+@media screen and (width < 768px) {
+    .checkout-side-menu {
+        height: 100%;
+        top:0;
+        z-index: 20;
+    }
+
     .checkout-side-menu--active {
         width: 100%;
     }

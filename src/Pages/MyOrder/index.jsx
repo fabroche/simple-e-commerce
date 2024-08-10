@@ -24,8 +24,8 @@ function MyOrder(props) {
     return (
         <Layout>
             <div
-                id="shoppingCart-container"
-                className="flex flex-col gap-4 p-6 w-1/2"
+                id="order-container"
+                className="flex flex-col gap-4 p-6 w-full max-w-screen-lg"
             >
 
                 <h2 className="flex justify-between items-center text-xl font-medium">

@@ -35,6 +35,8 @@ function ShopProvider({children}) {
     // Loading and error States
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    // NavBar
+    const [isNavBarOpen, setIsNavBarOpen] = useState(false)
 
     // Estados derivados
     const isProductDetailsOpen = Object.keys(productsDetails).length > 0
@@ -208,8 +210,13 @@ function ShopProvider({children}) {
             setLoading,
             error,
             setError,
+            // Responsive
+            screenWidth,
             // Util Functions
-            obtenerFechaActual
+            obtenerFechaActual,
+            // NavBar
+            isNavBarOpen,
+            setIsNavBarOpen
         }}>
             {children}
         </ShopContext.Provider>
