@@ -10,7 +10,6 @@
 .checkout-side-menu--active {
     opacity: 1;
     transform: translateX(0);
-    width: 360px;
 }
 
 #shoppingCart-products-container::-webkit-scrollbar {
@@ -28,4 +27,16 @@
     background-color: black; /* Color del thumb (deslizador) */
     border-radius: 20px; /* Redondez del thumb */
     border: 3px solid var(--soft-white); /* Crea un borde alrededor del thumb */
+}
+
+@media screen and (width >= 768px) {
+    .checkout-side-menu--active {
+        width: 360px;
+    }
+}
+
+@media screen and (width <= 425px) {
+    .checkout-side-menu--active {
+        width: 100%;
+    }
 }

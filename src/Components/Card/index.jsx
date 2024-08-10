@@ -16,7 +16,7 @@ function Card({product}) {
 
     return (
         <div
-            className={`${loading ? 'card--loading' : ''} relative bg-white cursor-pointer w-56 h-60 rounded-lg p-1 hover:scale-105 transition:all duration-200 ease`}>
+            className={`${loading ? 'card--loading' : ''} relative bg-white cursor-pointer w-full max-w-56 h-60 rounded-lg p-1 hover:scale-105 transition:all duration-200 ease`}>
             {!loading ? <>
                 <figure
                     onClick={() => showProductDetails(product)}

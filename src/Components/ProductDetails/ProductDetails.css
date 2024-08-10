@@ -11,5 +11,17 @@
 .product-details--active {
     opacity: 1;
     transform: translateX(0);
-    width: 360px;
+
+}
+
+@media screen and (width >= 768px) {
+    .product-details--active {
+        width: 360px;
+    }
+}
+
+@media screen and (width <= 425px) {
+    .product-details--active {
+        width: 100%;
+    }
 }

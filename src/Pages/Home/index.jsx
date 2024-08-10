@@ -1,4 +1,5 @@
 import React, {useContext, lazy, Suspense, useEffect} from 'react';
+import './Home.css'
 import {Layout} from "../../Components/Layout";
 import {Card} from "../../Components/Card";
 import {ShopContext} from "../../Context/index.jsx";
@@ -25,7 +26,7 @@ function Home() {
         <Layout>
             <h1 className="font-medium text-xl mb-2">Looti Products</h1>
             <input
-                className="rounded-lg border border-black w-80 p-2 pl-4 pr-4 mb-6 focus:outline-none"
+                className="rounded-lg border border-black w-full max-w-80 p-2 pl-4 pr-4 mb-6 focus:outline-none items-center justify-center"
                 type="text"
                 placeholder="Search a product"
                 value={search}
@@ -33,7 +34,7 @@ function Home() {
             />
             <div
                 id="productsList-container"
-                className="grid grid-cols-4 gap-4 w-full max-w-screen-lg"
+                className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-4 w-full max-w-screen-lg"
             >
                 {loading && [...Array(16)].map((_, index) => (
                     <Card
