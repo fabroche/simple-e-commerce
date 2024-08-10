@@ -20,7 +20,14 @@
     }
 }
 
-@media screen and (width <= 425px) {
+@media screen and (width < 768px) {
+
+    .product-details {
+        height: 100%;
+        top:0;
+        z-index: 20;
+    }
+
     .product-details--active {
         width: 100%;
     }
