@@ -85,7 +85,7 @@ function ShopProvider({children}) {
     }
 
     function handleShoppingCart(product) {
-        if (!isMyOrderOpen) {
+        if (!isMyOrderOpen && screenWidth > 768) {
             setIsMyOrderOpen(true)
         }
         if (isProductInCart(product)) {
