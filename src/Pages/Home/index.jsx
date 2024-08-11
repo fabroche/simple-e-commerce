@@ -70,7 +70,7 @@ function Home() {
                             setIsNavBarOpen(false)
                             setIsMyOrderOpen(true)
                         }}
-                        className="w-full h-full z-30"
+                        className="w-full h-full z-40"
                     />
                     <span
                         className="absolute w-6 h-6 -top-2 right-0 text-white bg-black rounded-full text-center">{shoppingCartCount}</span>

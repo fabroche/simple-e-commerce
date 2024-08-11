@@ -3,6 +3,7 @@ import './ProductDetails.css';
 import {XCircleIcon} from "@heroicons/react/24/solid";
 import {ShopContext} from "../../Context/index.jsx";
 import {PriceCurrency} from "../PriceCurrency/index.jsx";
+import {CheckIcon, PlusIcon} from "@heroicons/react/16/solid/index.js";
 
 function ProductDetails() {
 
@@ -10,6 +11,8 @@ function ProductDetails() {
         productsDetails,
         setProductsDetails,
         isProductDetailsOpen,
+        isProductInCart,
+        handleShoppingCart
     } = useContext(ShopContext);
 
     return (
@@ -31,9 +34,27 @@ function ProductDetails() {
                     alt={productsDetails?.title}
                 />
                 <div className="p-6 flex flex-col gap-2">
-                    <h3 className="relative font-medium text-2xl">
+                    <h3 className="relative flex justify-between items-center font-medium text-2xl">
+                        <span>
                         {Number(productsDetails?.price).toFixed(2)}
-                        <PriceCurrency currency={"€"}/>
+                            <PriceCurrency currency={"€"}/>
+                        </span>
+
+                        <button
+                            className={`${isProductInCart(productsDetails) ? 'bg-white text-black' : 'bg-black text-white'} flex justify-center items-center w-fit h-6 rounded-lg border border-black p-4 text-sm`}
+                        >
+                            {isProductInCart(productsDetails)
+                                ? <p
+                                    onClick={() => handleShoppingCart(productsDetails)}
+                                    className='w-full h-6'
+                                >Remove from cart</p>
+
+                                : <p
+                                    onClick={() => handleShoppingCart(productsDetails)}
+                                    className='w-full h-6'
+                                >Add to cart</p>
+                            }
+                        </button>
                     </h3>
                     <p className="font-semibold">{productsDetails?.title}</p>
                     <p>{productsDetails?.description}</p>
