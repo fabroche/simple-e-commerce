@@ -3,7 +3,6 @@ import './ProductDetails.css';
 import {XCircleIcon} from "@heroicons/react/24/solid";
 import {ShopContext} from "../../Context/index.jsx";
 import {PriceCurrency} from "../PriceCurrency/index.jsx";
-import {CheckIcon, PlusIcon} from "@heroicons/react/16/solid/index.js";
 
 function ProductDetails() {
 

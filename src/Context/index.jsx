@@ -37,6 +37,9 @@ function ShopProvider({children}) {
     const [error, setError] = useState(false)
     // NavBar
     const [isNavBarOpen, setIsNavBarOpen] = useState(false)
+    // Authentication
+    const [account, setAccount] = useLocalStorage('account', {})
+    const [signOut, setSignOut] = useLocalStorage('sign-out', true)
 
     // Estados derivados
     const isProductDetailsOpen = Object.keys(productsDetails).length > 0
@@ -167,6 +170,7 @@ function ShopProvider({children}) {
         setOrders(orders.sort((a, b) => new Date(b.date) - new Date(a.date)))
     }, [orders]);
 
+
     return (
         <ShopContext.Provider value={{
             // Products
@@ -216,7 +220,12 @@ function ShopProvider({children}) {
             obtenerFechaActual,
             // NavBar
             isNavBarOpen,
-            setIsNavBarOpen
+            setIsNavBarOpen,
+            // Authentication
+            account,
+            setAccount,
+            signOut,
+            setSignOut
         }}>
             {children}
         </ShopContext.Provider>

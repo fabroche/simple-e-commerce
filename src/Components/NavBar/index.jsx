@@ -9,13 +9,24 @@ import {XCircleIcon} from "@heroicons/react/24/solid/index.js";
 function NavBar() {
     const activeStyle = "underline";
     const {
-        categories,
+        // ShoppingCart
         shoppingCartCount,
+        // Categories
+        categories,
+        // Responsive
         screenWidth,
+        // NavBar
         isNavBarOpen,
         setIsNavBarOpen,
+        // Orders
         setIsMyOrderOpen,
-        setFilteredProductsCategories
+        // Products
+        setFilteredProductsCategories,
+        // Auth
+        account,
+        setAccount,
+        signOut,
+        setsignOut
     } = useContext(ShopContext);
 
     return (
@@ -130,59 +141,81 @@ function NavBar() {
                         </XCircleIcon>
 
                         <ul className="flex flex-col justify-between items-center gap-3 mt-16">
-                            <li className="font-light text-lg text-gray-400">
-                                fabroche@mail.com
-                            </li>
+                            {!signOut && <>
+                                <li className="font-light text-lg text-gray-400">
+                                    {account?.email}
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to='/my-orders'
+                                        className={
+                                            ({isActive}) =>
+                                                isActive
+                                                    ? activeStyle
+                                                    : undefined
+                                        }
+                                        onClick={() => {
+                                            setFilteredProductsCategories('')
+                                            setIsNavBarOpen(false)
+                                        }}
+                                    >
+                                        My Orders
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to='/my-account'
+                                        className={
+                                            ({isActive}) =>
+                                                isActive
+                                                    ? activeStyle
+                                                    : undefined
+                                        }
+                                        onClick={() => {
+                                            setFilteredProductsCategories('')
+                                            setIsNavBarOpen(false)
+                                        }}
+                                    >
+                                        My Account
+                                    </NavLink>
+                                </li>
+                            </>}
                             <li>
-                                <NavLink
-                                    to='/my-orders'
-                                    className={
-                                        ({isActive}) =>
-                                            isActive
-                                                ? activeStyle
-                                                : undefined
-                                    }
-                                    onClick={() => {
-                                        setFilteredProductsCategories('')
-                                        setIsNavBarOpen(false)
-                                    }}
-                                >
-                                    My Orders
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to='/my-account'
-                                    className={
-                                        ({isActive}) =>
-                                            isActive
-                                                ? activeStyle
-                                                : undefined
-                                    }
-                                    onClick={() => {
-                                        setFilteredProductsCategories('')
-                                        setIsNavBarOpen(false)
-                                    }}
-                                >
-                                    My Account
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to='/Sign-in'
-                                    className={
-                                        ({isActive}) =>
-                                            isActive
-                                                ? activeStyle
-                                                : undefined
-                                    }
-                                    onClick={() => {
-                                        setFilteredProductsCategories('')
-                                        setIsNavBarOpen(false)
-                                    }}
-                                >
-                                    Sign In
-                                </NavLink>
+                                {signOut
+                                    ? <NavLink
+                                        to='/Sign-in'
+                                        className={
+                                            ({isActive}) =>
+                                                isActive
+                                                    ? activeStyle
+                                                    : undefined
+                                        }
+                                        onClick={() => {
+                                            setFilteredProductsCategories('')
+                                            setIsNavBarOpen(false)
+                                        }}
+                                    >
+                                        Sign In
+                                    </NavLink>
+
+                                    : <NavLink
+                                        to='/Sign-in'
+                                        className={
+                                            ({isActive}) =>
+                                                isActive
+                                                    ? activeStyle
+                                                    : undefined
+                                        }
+                                        onClick={() => {
+                                            setFilteredProductsCategories('')
+                                            setIsNavBarOpen(false)
+                                            setsignOut(true)
+                                        }}
+                                    >
+                                        Sign Out
+                                    </NavLink>
+                                }
+
                             </li>
                             <li
                                 className="flex justify-center items-center"
@@ -201,50 +234,69 @@ function NavBar() {
                 </>}
                 {/*Screen >= 768px*/}
                 {screenWidth >= 768 && <>
-                    <li className="font-light text-lg text-gray-400">
-                        fabroche@mail.com
-                    </li>
+                    {!signOut && <>
+                        <li className="font-light text-lg text-gray-400">
+                            fabroche@mail.com
+                        </li>
+                        <li>
+                            <NavLink
+                                to='/my-orders'
+                                className={
+                                    ({isActive}) =>
+                                        isActive
+                                            ? activeStyle
+                                            : undefined
+                                }
+                                onClick={() => setFilteredProductsCategories('')}
+                            >
+                                My Orders
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to='/my-account'
+                                className={
+                                    ({isActive}) =>
+                                        isActive
+                                            ? activeStyle
+                                            : undefined
+                                }
+                                onClick={() => setFilteredProductsCategories('')}
+                            >
+                                My Account
+                            </NavLink>
+                        </li>
+                    </>}
                     <li>
-                        <NavLink
-                            to='/my-orders'
-                            className={
-                                ({isActive}) =>
-                                    isActive
-                                        ? activeStyle
-                                        : undefined
-                            }
-                            onClick={() => setFilteredProductsCategories('')}
-                        >
-                            My Orders
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to='/my-account'
-                            className={
-                                ({isActive}) =>
-                                    isActive
-                                        ? activeStyle
-                                        : undefined
-                            }
-                            onClick={() => setFilteredProductsCategories('')}
-                        >
-                            My Account
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to='/Sign-in'
-                            className={
-                                ({isActive}) =>
-                                    isActive
-                                        ? activeStyle
-                                        : undefined
-                            }
-                            onClick={() => setFilteredProductsCategories('')}
-                        >
-                            Sign In
-                        </NavLink>
+                        {signOut
+                            ? <NavLink
+                                to='/Sign-in'
+                                className={
+                                    ({isActive}) =>
+                                        isActive
+                                            ? activeStyle
+                                            : undefined
+                                }
+                                onClick={() => setFilteredProductsCategories('')}
+                            >
+                                Sign In
+                            </NavLink>
+
+                            : <NavLink
+                                to='/Sign-in'
+                                className={
+                                    ({isActive}) =>
+                                        isActive
+                                            ? activeStyle
+                                            : undefined
+                                }
+                                onClick={() => {
+                                    setFilteredProductsCategories('')
+                                    setsignOut(true)
+                                }}
+                            >
+                                Sign Out
+                            </NavLink>}
                     </li>
                     <li
                         className="flex justify-center items-center"
