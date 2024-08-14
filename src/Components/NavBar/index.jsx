@@ -26,7 +26,7 @@ function NavBar() {
         account,
         setAccount,
         signOut,
-        setsignOut
+        setSignOut
     } = useContext(ShopContext);
 
     return (
@@ -209,7 +209,7 @@ function NavBar() {
                                         onClick={() => {
                                             setFilteredProductsCategories('')
                                             setIsNavBarOpen(false)
-                                            setsignOut(true)
+                                            setSignOut(true)
                                         }}
                                     >
                                         Sign Out
@@ -236,7 +236,7 @@ function NavBar() {
                 {screenWidth >= 768 && <>
                     {!signOut && <>
                         <li className="font-light text-lg text-gray-400">
-                            fabroche@mail.com
+                            {account?.email}
                         </li>
                         <li>
                             <NavLink
@@ -292,7 +292,7 @@ function NavBar() {
                                 }
                                 onClick={() => {
                                     setFilteredProductsCategories('')
-                                    setsignOut(true)
+                                    setSignOut(true)
                                 }}
                             >
                                 Sign Out
