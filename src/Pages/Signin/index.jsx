@@ -1,7 +1,7 @@
 import React, {useContext, useRef, useState} from 'react';
 import {Layout} from "../../Components/Layout";
 import {ShopContext} from "../../Context/index.jsx";
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 
 function Signin() {
 
@@ -18,7 +18,8 @@ function Signin() {
     const [view, setView] = useState('login');
     const form = useRef(null);
 
-    const createAnAccount = () => {
+    const createAnAccount = (e) => {
+        e.preventDefault()
         const formData = new FormData(form.current);
         setAccount({
             name: formData.get('name'),
@@ -27,6 +28,7 @@ function Signin() {
         })
         setFilteredProductsCategories('')
         setSignOut(false)
+        location.href = '/'
     }
 
     const renderLogIn = () => {
@@ -57,12 +59,14 @@ function Signin() {
                 <div className="text-center">
                     <a className="font-light text-xs underline underline-offset-4" href="/">Forgot my password</a>
                 </div>
+
                 <button
                     className="border border-black disabled:text-black/40 disabled:border-black/40 rounded-lg mt-6 py-3"
                     onClick={() => setView('sign-up')}
                 >
                     Sign up
                 </button>
+
             </div>
         )
     }
@@ -70,7 +74,7 @@ function Signin() {
     const renderCreateUserInfo = () => {
 
         return (
-            <form ref={form} className="flex flex-col gap-4 w-80">
+            <form ref={form} className="flex flex-col gap-4 w-80" onSubmit={(e) => createAnAccount(e)}>
                 <div className="flex flex-col gap-1">
                     <label htmlFor="name" className="font-light text-sm">Your name:</label>
                     <input
@@ -107,13 +111,14 @@ function Signin() {
                         required
                     />
                 </div>
-                <Link to="/">
+
                     <button
-                    className="bg-black text-white w-full rounded-lg py-3"
-                    onClick={() => createAnAccount()}
+                        type={"submit"}
+                        className="bg-black text-white w-full rounded-lg py-3"
                     >Create
                     </button>
-                </Link>
+
+
             </form>
         )
     }
