@@ -24,6 +24,8 @@ function CheckoutSideMenu() {
         account,
         signOut,
         isSignUp,
+        // Responsive
+        screenWidth
     } = useContext(ShopContext);
 
 
@@ -47,6 +49,10 @@ function CheckoutSideMenu() {
             setShoppingCartProducts([]);
             setIsMyOrderOpen(false);
             setOrders([...orders, toAddOrder]);
+        } else {
+            if (screenWidth <= 768) {
+                setIsMyOrderOpen(false)
+            }
         }
     }
 
