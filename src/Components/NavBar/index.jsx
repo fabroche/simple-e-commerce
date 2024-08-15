@@ -36,7 +36,7 @@ function NavBar() {
                 {/*Filters for tablets and upper*/}
                 <li className="font-semibold text-lg">
                     <NavLink
-                        to={signOut ? '/sign-in' : '/'}
+                        to={'/'}
                         onClick={() => setFilteredProductsCategories('')}
                     >
                         Lootify
