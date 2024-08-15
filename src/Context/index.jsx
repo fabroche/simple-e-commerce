@@ -51,6 +51,7 @@ function ShopProvider({children}) {
 
     const ordersOwner = orders.filter(orders => orders.owner === account.name)
     const isSignUp = Object.keys(account).length > 0
+    const isAuthenticate = isSignUp && !signOut
     // Observers
 
     // callbacks
@@ -229,7 +230,8 @@ function ShopProvider({children}) {
             setAccount,
             signOut,
             setSignOut,
-            isSignUp
+            isSignUp,
+            isAuthenticate
         }}>
             {children}
         </ShopContext.Provider>

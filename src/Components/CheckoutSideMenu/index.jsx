@@ -88,7 +88,7 @@ function CheckoutSideMenu() {
                     }
                 </div>
 
-                <Link to={signOut ? "/Sign-in" : "/my-order/last"}>
+                <Link to={signOut ? "/sign-in" : "/my-order/last"}>
                     <button
                         onClick={() => handleCheckout()}
                         className="relative w-full p-1 pr-4 pl-4 font-medium text-xl rounded-lg border border-black bg-black text-white text-center"
