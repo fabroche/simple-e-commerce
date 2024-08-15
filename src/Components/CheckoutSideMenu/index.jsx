@@ -9,14 +9,19 @@ import {PriceCurrency} from "../PriceCurrency/index.jsx";
 function CheckoutSideMenu() {
 
     const {
+        // Shopping Cart
         shoppingCartProducts,
         setShoppingCartProducts,
         shoppingCartTotalPrice,
+        // Orders
+        orders,
+        setOrders,
         isMyOrderOpen,
         setIsMyOrderOpen,
+        // Utils
         obtenerFechaActual,
-        orders,
-        setOrders
+        // Auth
+        account
     } = useContext(ShopContext);
 
 
@@ -30,6 +35,7 @@ function CheckoutSideMenu() {
         }, {});
 
         const toAddOrder = {
+            owner: account?.name,
             date: obtenerFechaActual(),
             products: newOrder,
             total: Number(shoppingCartTotalPrice)

@@ -33,7 +33,7 @@ function ProductDetails() {
                     alt={productsDetails?.title}
                 />
                 <div className="p-6 flex flex-col gap-2">
-                    <h3 className="relative flex justify-between items-center font-medium text-2xl">
+                    <h3 className="relative flex justify-between items-center font-medium text-2xl mb-2">
                         <span>
                         {Number(productsDetails?.price).toFixed(2)}
                             <PriceCurrency currency={"€"}/>

@@ -38,7 +38,7 @@ function Signin() {
                 </p>
                 <p>
                     <span className="font-light text-sm">Password: </span>
-                    <span>{'*'.repeat(account.password.length)}</span>
+                    <span>{'*'.repeat(account?.password?.length)}</span>
                 </p>
                 <Link
                     to="/"

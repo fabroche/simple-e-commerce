@@ -49,6 +49,8 @@ function ShopProvider({children}) {
         : product.title.toLowerCase().includes(search.toLowerCase())
     )
 
+    const ordersOwner = orders.filter(orders => orders.owner === account.name)
+
     // Observers
 
     // callbacks
@@ -201,6 +203,7 @@ function ShopProvider({children}) {
             // Orders
             orders,
             setOrders,
+            ordersOwner,
             isMyOrderOpen,
             setIsMyOrderOpen,
             // Search

@@ -7,13 +7,13 @@ import {Link} from "react-router-dom";
 
 function MyOrders() {
 
-    const {orders} = useContext(ShopContext);
+    const {ordersOwner} = useContext(ShopContext);
 
     return (
         <Layout>
             <h1 className="mb-6 text-lg font-medium">MyOrders</h1>
             <div className="orders-list-container flex gap-4 justify-center items-center flex-wrap mb-2">
-                {orders.map((order, index) => (
+                {ordersOwner.map((order, index) => (
                     <Link key={index} to={`/my-order/${index}`} className="w-full">
                         <MyOrderCard
                             key={order.date}
