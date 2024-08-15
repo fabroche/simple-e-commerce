@@ -3,7 +3,7 @@ import './CheckoutSideMenu.css';
 import {XCircleIcon} from "@heroicons/react/24/solid";
 import {ShopContext} from "../../Context/index.jsx";
 import {OrderCard} from "../OrderCard";
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import {PriceCurrency} from "../PriceCurrency/index.jsx";
 
 function CheckoutSideMenu() {
@@ -21,29 +21,33 @@ function CheckoutSideMenu() {
         // Utils
         obtenerFechaActual,
         // Auth
-        account
+        account,
+        signOut,
+        isSignUp,
     } = useContext(ShopContext);
 
 
     function handleCheckout() {
 
-        const newOrder = shoppingCartProducts.reduce((diccionario, producto) => {
-            const quantity = Number(document.getElementById(`${producto.id}-quantity`).innerText);
-            const totalPrice = Number(quantity * producto.price).toFixed(2);
-            diccionario[producto.title] = {...producto, quantity: quantity, totalPrice: Number(totalPrice)};
-            return diccionario;
-        }, {});
+        if (isSignUp && !signOut) {
+            const newOrder = shoppingCartProducts.reduce((diccionario, producto) => {
+                const quantity = Number(document.getElementById(`${producto.id}-quantity`).innerText);
+                const totalPrice = Number(quantity * producto.price).toFixed(2);
+                diccionario[producto.title] = {...producto, quantity: quantity, totalPrice: Number(totalPrice)};
+                return diccionario;
+            }, {});
 
-        const toAddOrder = {
-            owner: account?.name,
-            date: obtenerFechaActual(),
-            products: newOrder,
-            total: Number(shoppingCartTotalPrice)
-        };
+            const toAddOrder = {
+                owner: account?.name,
+                date: obtenerFechaActual(),
+                products: newOrder,
+                total: Number(shoppingCartTotalPrice)
+            };
 
-        setShoppingCartProducts([]);
-        setIsMyOrderOpen(false);
-        setOrders([...orders, toAddOrder]);
+            setShoppingCartProducts([]);
+            setIsMyOrderOpen(false);
+            setOrders([...orders, toAddOrder]);
+        }
     }
 
     return (
@@ -78,7 +82,7 @@ function CheckoutSideMenu() {
                     }
                 </div>
 
-                <Link to="/my-order/last">
+                <Link to={signOut ? "/Sign-in" : "/my-order/last"}>
                     <button
                         onClick={() => handleCheckout()}
                         className="relative w-full p-1 pr-4 pl-4 font-medium text-xl rounded-lg border border-black bg-black text-white text-center"
