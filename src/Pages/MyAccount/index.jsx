@@ -40,10 +40,9 @@ function MyAccount() {
         </div>
     )
 
-    const handleEditUserInfo = (e) => {
+    const handleEditUserInfo = () => {
         editAccount()
         setView('user-info')
-        location.href = '/my-account'
     }
 
     const renderEditUserInfo = () => (
